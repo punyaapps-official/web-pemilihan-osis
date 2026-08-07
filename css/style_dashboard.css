@@ -1,0 +1,147 @@
+body {
+  font-family: sans-serif;
+  background-image: url("../image/bg.jpg");
+  background-repeat ;
+  background-size:cover;
+  padding: 0;
+  margin: 0;
+}
+
+
+div{
+    width: 90%;
+    margin: 20px auto;
+    box-sizing: border-box;
+
+}
+
+
+.informasi{
+    background-color: rgb(241, 243, 225);
+    padding: 10px;
+    border: 2px dotted rgb(255, 0, 0);
+    overflow: hidden;
+    text-align: justify;
+    width: 100%;
+
+}
+
+a{
+    background: blue;
+    color: #fff;
+    padding: 8px 10px;
+    text-decoration: none;
+    border-radius: 2px;
+  }
+
+  .siswa {
+     width: 30%;
+    height: 100px;
+    background-color: rgb(85, 83, 83);
+    display: inline-block;
+    margin-right: 30px;
+    font-size: 33px;
+    border-radius: 5px;
+    font-family: Courier New;
+      font-weight: bold;
+      color: white;
+      font-style: italic;
+       text-align: center;
+
+
+    }
+
+    .Kandidat{
+
+    width: 30%;
+    height: 110px;
+    background-color: tomato;
+    display: inline-block;
+    margin-right: 30px;
+    font-size: 33px;
+    border-radius: 5px;
+    font-family: Courier New;
+    font-weight: bold;
+    color: white;
+    font-style: italic;
+    text-align: center;
+
+
+    }
+
+    .kelas{
+
+     width: 30%;
+    height: 100px;
+    background-color: rgb(26, 141, 26);
+    display: inline-block;
+    margin-right: 30px;
+   font-size: 33px;
+    border-radius: 5px;
+    font-family: Courier New;
+    font-weight: bold;
+    color: white;
+    font-style: italic;
+	text-align: center;
+
+    }
+
+    
+
+    
+
+    h2 {
+      color: white;
+      
+    }
+
+    h1 {
+      color: #191970;
+      
+    }
+
+
+    .info{
+
+      background-color: hsl(59, 90%, 24%); 
+  
+  }
+
+
+
+   
+
+    .utama{
+
+        background-color: rgb(3, 92, 22); 
+
+    }
+
+   
+
+
+    .backup{
+
+        background-color: rgb(84, 139, 221); 
+
+    }
+
+
+    .hapus{
+
+        background-color: red; 
+
+    }
+
+
+    .restore{
+
+      background-color: rgb(46, 187, 93); 
+
+  }
+
+  .keluar{
+
+    background-color: hsl(0, 89%, 38%); 
+
+}

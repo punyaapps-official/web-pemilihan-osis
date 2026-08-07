@@ -1,0 +1,80 @@
+    body {
+  /*background: #3498db;*/
+  font-family: sans-serif;
+  background-image: url("../image/bg.jpg");
+  background-repeat ;
+  background-size:cover;
+
+}
+
+
+
+
+
+
+input[type="text"], input[type="password"], input[type="file"] {
+  padding: 10px;
+  width: 95%;
+  background: #efefef;
+  border: 0;
+  font-size: 15pt;
+  margin: 6px 0px;
+}
+
+
+  
+
+select{
+  padding: 12px;
+  width: 100%;
+  background: #efefef;
+  border: 0;
+  font-size: 15pt;
+  margin: 6px 0px;
+}
+
+
+
+  a{
+    background: blue;
+    color: #fff;
+    padding: 8px 10px;
+    text-decoration: none;
+    border-radius: 2px;
+  }
+
+  .tombol{
+    background: blue;
+    color: #fff;
+    padding: 7px 80px;
+    text-decoration: none;
+    border-radius: 15px;
+  }
+
+
+  
+
+.data {
+  padding: 3em;
+  margin: 0em auto;
+  width: 25em;
+  background: #fff;
+  border-radius: 15px;
+}
+
+ .login {
+  padding: 3em;
+  margin: 100px auto;
+  width: 25em;
+  background: #fff;
+  border-radius: 15px;
+
+}
+
+
+label {
+  font-size: 12pt;
+  color: #555;
+}
+
+

@@ -1,0 +1,216 @@
+<script type="text/javascript">
+    
+    window.print()
+    
+
+</script>
+    
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .kandidat-card {
+            width: 25%;
+            text-align: center;
+            margin: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .kandidat-image {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: transform 0.3s; /* Transisi perubahan transformasi */
+        }
+        .nomor-kandidat {
+            font-weight: bold;
+            font-size: 18px;
+            color: #e74c3c; /* Ganti dengan warna yang Anda inginkan */
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .pilih-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .pilih-button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .kandidat-card {
+                width: 80%;
+            }
+            .kandidat-card:hover .kandidat-image img {
+                transform: scale(1.1); /* Efek perbesaran gambar saat dihover */
+            }
+            .kandidat-footer {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 10px;
+                background-color: rgba(0, 0, 0, 0.7);
+                text-align: center;
+                display: none;
+            }
+            .kandidat-card:hover .kandidat-footer {
+                display: block; /* Tampilkan footer saat dihover */
+            }
+
+
+            .keluar-button {
+    display: inline-block;
+    background-color: #e74c3c; /* Warna latar belakang tombol */
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.keluar-button:hover {
+    background-color: #c0392b; /* Warna latar belakang tombol saat dihover */
+    transform: scale(1.05); /* Efek perbesaran tombol saat dihover */
+}
+
+a{
+  text-decoration: none;
+  
+}
+
+
+        }
+    </style>
+    
+
+    <link rel="shortcut icon" href="../../cbt/aset_gambar/logo.png">
+
+
+    <title>REKAP VOTING</title>
+    
+    
+  <center>
+        <h1>=== HASIL VOTING ===</h1>
+
+
+        <?php 
+        require '../../config.php';
+
+
+        // menampilkan data
+        $data = mysqli_query($db,"SELECT * FROM tb_identitassekolah");
+        $d = mysqli_fetch_assoc($data);
+        
+    ?>
+
+        <center><h4>
+            <?php echo $d['npsn']; ?> -
+            <?php echo $d['nm_sekolah']; ?> 
+        </h4></center>
+       
+    </center>
+<hr>
+    <div class="container">
+    <?php
+    require '../../config.php';
+
+    $query = "SELECT * FROM tb_kandidat ORDER BY no_kandidat ASC";
+    $result = mysqli_query($db, $query);
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo '<div class="kandidat-card">';
+        echo '<div class="kandidat-header">';
+        echo '<span class="nomor-kandidat">'. 'NO '. $row['no_kandidat'] . '</span>';
+        echo '<h2>' . $row['nama'] . '</h2>';
+        echo '</div>';
+        echo '<img src="../../image/foto_kandidat/' . $row['photo'] . '" alt="' . $row['nama'] . '">';
+        echo '</a>';
+
+
+
+        $queryCount = "SELECT COUNT(*) as total_voting FROM tb_pilih WHERE id_kandidat = '" . $row['no_kandidat'] . "'";
+    $resultCount = mysqli_query($db, $queryCount);
+    $rowCount = mysqli_fetch_assoc($resultCount);
+
+    echo '<div class="kandidat-footer">';
+    echo '<br>';
+    echo 'JUMLAH VOTING: ' . $rowCount['total_voting'];
+    echo '</div>';
+
+    echo '</div>';
+}
+
+
+       
+
+    mysqli_close($db);
+    ?>
+</div>
+
+
+    <script>
+    const pilihButtons = document.querySelectorAll('.pilih-button');
+    pilihButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const idKandidat = button.getAttribute('data-id');
+            const noId = button.getAttribute('data-no-id');
+            
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'proses_pemilihan.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert(xhr.responseText); // Tampilkan pesan respons dari server (opsional)
+                    window.location.href = 'index.php'; // Redirect ke halaman utama setelah pemilihan
+                }
+            };
+            const data = 'no_id=' + encodeURIComponent(noId) + '&no_kandidat=' + encodeURIComponent(idKandidat);
+            xhr.send(data);
+        });
+    });
+</script>
+
+
+
+
+
+
+<?php 
+require '../../config.php';
+
+// Menghitung total pemilih
+$queryTotalPemilih = "SELECT COUNT(*) as total_pemilih FROM tb_pemilih";
+$resultTotalPemilih = mysqli_query($db, $queryTotalPemilih);
+$rowTotalPemilih = mysqli_fetch_assoc($resultTotalPemilih);
+
+// Menghitung jumlah yang sudah memilih
+$queryPemilihMemilih = "SELECT COUNT(*) as pemilih_memilih FROM tb_pilih";
+$resultPemilihMemilih = mysqli_query($db, $queryPemilihMemilih);
+$rowPemilihMemilih = mysqli_fetch_assoc($resultPemilihMemilih);
+
+// Menghitung jumlah yang belum memilih
+$jumlahPemilihBelumMemilih = $rowTotalPemilih['total_pemilih'] - $rowPemilihMemilih['pemilih_memilih'];
+?>
+
+<hr>
+<h1>Jumlah DPT  :   <?php echo $rowTotalPemilih['total_pemilih']; ?></h1>
+<h1>Jumlah DPT yang memilih :   <?php echo $rowPemilihMemilih['pemilih_memilih']; ?></h1>
+<h1>Jumlah DPT yang tidak memilih   :   <?php echo $jumlahPemilihBelumMemilih; ?></h1>
